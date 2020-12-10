@@ -7,63 +7,59 @@
     android:background="#211D44"
     tools:context=".MainActivity">
 
-
     <ImageView
-        android:id="@+id/bgcircle"
-        android:layout_width="215dp"
-        android:layout_height="215dp"
+        android:id="@+id/ivSplash"
+        android:layout_width="256dp"
+        android:layout_height="249dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/bgcircle"
+        android:src="@drawable/icget"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.124"
+        app:layout_constraintVertical_bias="0.014" />
 
-
-        />
-
-
-    <ImageView
-        android:id="@+id/icanchor"
-        android:layout_width="282dp"
-        android:layout_height="282dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/icanchor"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-
-        app:layout_constraintVertical_bias="0.076" />
-
-    <Chronometer
-        android:id="@+id/timerHere"
+    <TextView
+        android:id="@+id/tvSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:text="Healthy On You"
         android:textColor="#FFF"
-        android:textSize="62sp"
+        android:textSize="18sp"
 
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.586" />
+
+    <TextView
+        android:id="@+id/tvSubSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Key of happiness is not \nlife for money"
+        android:textAlignment="center"
+        android:textColor="#A3A2AD"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.716" />
 
     <Button
         android:id="@+id/btnfinish"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_width="222dp"
+        android:layout_height="45dp"
 
         android:background="@drawable/bgbtngreen"
-        android:onClick="start"
-        android:text="Start Now"
+        android:onClick="getStarted"
+        android:text="Get Started"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="20sp"
@@ -72,26 +68,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
-
-    <Button
-        android:id="@+id/btnstop"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-
-        android:background="@drawable/bgbtnred"
-        android:onClick="stop"
-        android:text="Finish Workout"
-        android:textAllCaps="false"
-        android:textColor="#AF3555"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.919" />
-
+        app:layout_constraintVertical_bias="0.906" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

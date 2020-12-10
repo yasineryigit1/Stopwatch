@@ -15,19 +15,32 @@ import android.widget.ImageView;
 public class StopWatchAct extends AppCompatActivity {
 
     Button btnstart,btnstop;
-    ImageView icanchor;
-    Animation roundingalone;
+    ImageView icanchor,bgcircle;
+    Animation roundingalone,atg,btgone,btgtwo;
     Chronometer timerHere;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_watch);
-
+        //view decleration
         btnstart =findViewById(R.id.btnfinish);
         btnstop=findViewById(R.id.btnstop);
+        bgcircle=findViewById(R.id.bgcircle);
         icanchor =findViewById(R.id.icanchor);
         timerHere =findViewById(R.id.timerHere);
+
+        //animation decleration
+        atg= AnimationUtils.loadAnimation(this,R.anim.atg);
+        btgone=AnimationUtils.loadAnimation(this,R.anim.btgone);
+        btgtwo=AnimationUtils.loadAnimation(this,R.anim.btgtwo);
+
+        //animasyonları başlat
+        bgcircle.startAnimation(atg);
+        icanchor.startAnimation(atg);
+        timerHere.startAnimation(btgone);
+        btnstart.startAnimation(btgone);
+        btnstop.startAnimation(btgtwo);
 
         //Stop butonu start'a basılmadan önce tıklanılamaz
         btnstop.setAlpha(0);
