@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Healthy On You"
+        android:text="Healthy Life"
         android:textColor="#FFF"
         android:textSize="18sp"
 
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Key of happiness is not \nlife for money"
+        android:text="The pain you feel today will be\n the strength you feel tomorrow"
         android:textAlignment="center"
         android:textColor="#A3A2AD"
         android:textSize="13sp"
