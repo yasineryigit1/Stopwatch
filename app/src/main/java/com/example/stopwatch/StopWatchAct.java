@@ -17,6 +17,9 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class StopWatchAct extends AppCompatActivity {
     HeadsetBroadcastingClass headsetBroadcastingClass;
     Button btnstart,btnstop;
@@ -24,6 +27,8 @@ public class StopWatchAct extends AppCompatActivity {
     Animation roundingalone,atg,btgone,btgtwo;
     Chronometer timerHere;
     MediaPlayer mp;
+    Timer timer1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,21 +90,23 @@ public class StopWatchAct extends AppCompatActivity {
 
         timerHere.setBase(SystemClock.elapsedRealtime());
         timerHere.start();
-
+        startTimerForSound(3000,"5left");
         btnstart.setEnabled(false);
-        timerHere.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                long elapsedSecond = (SystemClock.elapsedRealtime() - chronometer.getBase())/1000;
-                //hangi zamanda ne yapacağımız
-                if (elapsedSecond==3){
-                    System.out.println("gecen: "+ elapsedSecond);
-                    Toast.makeText(StopWatchAct.this, "3 seconds", Toast.LENGTH_SHORT).show();
-                    startService(new Intent(StopWatchAct.this,MusicService.class));
-                }
 
+
+    }
+
+    public void startTimerForSound(long left,String soundType){
+        timer1 = new Timer();
+        final String msoundType = soundType;
+        final TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                //Toast.makeText(getApplicationContext(), "3 seconds", Toast.LENGTH_SHORT).show();
+                startService(new Intent(StopWatchAct.this,MusicService.class).putExtra("soundType",msoundType));
             }
-        });
+        };
+        timer1.schedule(task, left);
 
     }
 
@@ -114,6 +121,8 @@ public class StopWatchAct extends AppCompatActivity {
 
         //ending timer
         timerHere.stop();
+        timer1.cancel();
+        MusicService.mp.stop();
         btnstart.setEnabled(true);
 
     }
