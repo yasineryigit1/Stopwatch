@@ -8,33 +8,51 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/ivSplash"
-        android:layout_width="352dp"
-        android:layout_height="353dp"
+        android:id="@+id/settingsSplash"
+        android:layout_width="336dp"
+        android:layout_height="263dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/icget"
+        android:src="@drawable/settingssplash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <TextView
         android:id="@+id/tvSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Healthy Life"
+        android:text="Total Goal:"
         android:textColor="#FFF"
-        android:textSize="24sp"
+        android:textSize="18sp"
 
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.575" />
+
+    <TextView
+        android:id="@+id/restDurationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Rest Duration:"
+        android:textColor="#FFF"
+        android:textSize="18sp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.646" />
 
     <TextView
         android:id="@+id/tvSubSplash"
@@ -57,8 +75,8 @@
         android:layout_height="60dp"
 
         android:background="@drawable/bgbtngreen"
-        android:onClick="getStarted"
-        android:text="Get Started"
+        android:onClick="save"
+        android:text="SAVE"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="20sp"
@@ -69,22 +87,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.906" />
 
-    <Button
-        android:id="@+id/btnSettings"
-        android:layout_width="205dp"
-        android:layout_height="43dp"
+    <NumberPicker
+        android:id="@+id/restNumberPicker"
+        android:layout_width="48dp"
+        android:layout_height="66dp"
+        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
 
-        android:background="@drawable/customizebutton"
-        android:onClick="getSettings"
-        android:textAllCaps="false"
-        android:textColor="#FFF"
-        android:textSize="20sp"
+
+        android:solidColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995" />
+        app:layout_constraintVertical_bias="0.669" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

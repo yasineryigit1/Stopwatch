@@ -2,12 +2,15 @@ package com.example.stopwatch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -42,6 +45,8 @@ public class StopWatchAct extends AppCompatActivity {
         bgcircle=findViewById(R.id.bgcircle);
         icanchor =findViewById(R.id.icanchor);
         timerHere =findViewById(R.id.timerHere);
+
+        
 
         //animation decleration
         atg= AnimationUtils.loadAnimation(this,R.anim.atg);
@@ -80,8 +85,6 @@ public class StopWatchAct extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 
 
     public void baslat(){
@@ -140,4 +143,10 @@ public class StopWatchAct extends AppCompatActivity {
     }
 
 
+
+
+
 }
+
+
+

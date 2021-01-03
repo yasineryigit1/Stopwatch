@@ -63,7 +63,7 @@
 
         android:background="@drawable/bgbtngreen"
         android:onClick="start"
-        android:text="Start Now"
+        android:text="Take a break"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="20sp"
@@ -81,7 +81,7 @@
 
         android:background="@drawable/bgbtnred"
         android:onClick="stop"
-        android:text="Finish Workout"
+        android:text="Back to the training"
         android:textAllCaps="false"
         android:textColor="#AF3555"
         android:textSize="20sp"
