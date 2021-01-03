@@ -58,7 +58,7 @@
 
         android:background="@drawable/bgbtngreen"
         android:onClick="getStarted"
-        android:text="Get Started"
+        android:text="Start Workout"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="20sp"

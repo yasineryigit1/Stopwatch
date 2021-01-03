@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,6 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Timer;
@@ -31,7 +33,13 @@ public class StopWatchAct extends AppCompatActivity {
     Chronometer timerHere;
     MediaPlayer mp;
     Timer timer1;
-    Boolean baslatBoolean = true;
+    Boolean baslatTotalBoolean = true;
+    //countdown part
+    TextView restCountdownText;
+    CountDownTimer countDownTimer;
+    int restDurationSecond;//settings'den geldi (seconds) cinsinden
+    long restDurationInMilliSeconds;//settingsten geldi
+    boolean isRestTimerRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +54,16 @@ public class StopWatchAct extends AppCompatActivity {
         icanchor =findViewById(R.id.icanchor);
         timerHere =findViewById(R.id.timerHere);
 
-        
+        //restDuration part
+        restCountdownText = findViewById(R.id.restCountdownText);
+        Intent intent = getIntent();
+        restDurationSecond = intent.getIntExtra("restDuration",60);//kaçtan geri sayacağı (second)
+        restDurationInMilliSeconds = restDurationSecond*1000; //kaçtan geri sayacağı (millisecond)
+        setRestText();
+
+        //timerHere otomatik başlat
+        baslatTotal();
+
 
         //animation decleration
         atg= AnimationUtils.loadAnimation(this,R.anim.atg);
@@ -78,8 +95,8 @@ public class StopWatchAct extends AppCompatActivity {
         // This is the center button for headphones
         if (event.getKeyCode() == KeyEvent.KEYCODE_HEADSETHOOK) {
             Toast.makeText(StopWatchAct.this, "BUTTON PRESSED!", Toast.LENGTH_SHORT).show();
-            if(baslatBoolean==true){
-                baslat();
+            if(baslatTotalBoolean==true){
+                baslatTotal();
             }
             return true;
         }
@@ -87,8 +104,9 @@ public class StopWatchAct extends AppCompatActivity {
     }
 
 
-    public void baslat(){
-        baslatBoolean=false;
+
+    public void baslatTotal(){
+        baslatTotalBoolean=false;
         icanchor.startAnimation(roundingalone);
 
         //Stop butonu start'a tıkladıktan 300ms sonra clickable hale gelir
@@ -125,11 +143,12 @@ public class StopWatchAct extends AppCompatActivity {
     }
 
     public void start(View v){
-        baslat();
+
+        startRestTimer();
     }
 
     public void stop(View v){
-        baslatBoolean=true;
+        baslatTotalBoolean=true;
         //ending animation
         icanchor.clearAnimation();
         btnstart.animate().alpha(1).setDuration(300).start();
@@ -139,7 +158,62 @@ public class StopWatchAct extends AppCompatActivity {
         timer1.cancel();
         MusicService.mp.stop();
         btnstart.setEnabled(true);
+        stopRestTimer();
 
+    }
+
+
+
+    //RestTimer
+    //karar mekanizması, çalışıyorsa baştan alır,
+    public void restCountdown(){
+        if(isRestTimerRunning){
+
+        }else{
+
+        }
+    }
+    //rest time saymaya başladı
+    public void startRestTimer(){
+        restDurationInMilliSeconds=restDurationSecond*1000;
+        //her başlatmada sıfırdan başla
+        countDownTimer = new CountDownTimer(restDurationInMilliSeconds,1000) {
+            @Override
+            public void onTick(long l) {
+                restDurationInMilliSeconds = l;
+                int minutes =(int)restDurationInMilliSeconds/60000;
+                int seconds = (int) restDurationInMilliSeconds%60000/1000;
+                String timeLeftText = ""+minutes;
+                timeLeftText+=":";
+                if(seconds<10) timeLeftText+="0";
+                timeLeftText+=seconds;
+
+                restCountdownText.setText(timeLeftText);
+
+            }
+
+            @Override
+            public void onFinish() {
+                restCountdownText.setText("DONE!");
+            }
+        }.start();
+        isRestTimerRunning = true;
+    }
+
+    public void stopRestTimer(){
+        countDownTimer.cancel();
+        isRestTimerRunning = false;
+    }
+
+    public void setRestText(){
+        int minutes =(int)restDurationInMilliSeconds/60000;
+        int seconds = (int)restDurationInMilliSeconds%60000/1000;
+        String timeLeftText = ""+minutes;
+        timeLeftText+=":";
+        if(seconds<10) timeLeftText+="0";
+        timeLeftText+=seconds;
+
+        restCountdownText.setText(timeLeftText);
     }
 
 

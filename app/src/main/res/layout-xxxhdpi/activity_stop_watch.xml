@@ -9,23 +9,6 @@
 
 
     <ImageView
-        android:id="@+id/bgcircle"
-        android:layout_width="215dp"
-        android:layout_height="215dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bgcircle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.124"
-
-
-        />
-
-
-    <ImageView
         android:id="@+id/icanchor"
         android:layout_width="282dp"
         android:layout_height="282dp"
@@ -41,20 +24,36 @@
         app:layout_constraintTop_toTopOf="@+id/bgcircle"
         app:layout_constraintVertical_bias="0.462" />
 
-    <Chronometer
-        android:id="@+id/timerHere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:textSize="62sp"
-
-
+    <ImageView
+        android:id="@+id/bgcircle"
+        android:layout_width="215dp"
+        android:layout_height="215dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bgcircle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.159"
+
+
+        />
+
+    <Chronometer
+        android:id="@+id/timerHere"
+        android:layout_width="99dp"
+        android:layout_height="31dp"
+        android:gravity="center"
+        android:textColor="#FFF"
+
+
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
 
     <Button
         android:id="@+id/btnfinish"
@@ -91,6 +90,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.919" />
+
+    <TextView
+        android:id="@+id/restCountdownText"
+        android:layout_width="144dp"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:text="10:00"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.624" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
