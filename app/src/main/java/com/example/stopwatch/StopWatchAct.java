@@ -28,6 +28,7 @@ public class StopWatchAct extends AppCompatActivity {
     Chronometer timerHere;
     MediaPlayer mp;
     Timer timer1;
+    Boolean baslatBoolean = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +73,19 @@ public class StopWatchAct extends AppCompatActivity {
         // This is the center button for headphones
         if (event.getKeyCode() == KeyEvent.KEYCODE_HEADSETHOOK) {
             Toast.makeText(StopWatchAct.this, "BUTTON PRESSED!", Toast.LENGTH_SHORT).show();
-            baslat();
+            if(baslatBoolean==true){
+                baslat();
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
 
+
+
     public void baslat(){
+        baslatBoolean=false;
         icanchor.startAnimation(roundingalone);
 
         //Stop butonu start'a tıkladıktan 300ms sonra clickable hale gelir
@@ -90,12 +96,17 @@ public class StopWatchAct extends AppCompatActivity {
 
         timerHere.setBase(SystemClock.elapsedRealtime());
         timerHere.start();
-        startTimerForSound(3000,"5left");
+        //0001. milisaniyede başlayacak, firstStart kodlu soundu çalacak
+        startTimerForSound(0000,"firstStart");
+        //3000. milisaniyede başlayacak, 5left kodlu soundu çalacak
+        startTimerForSound(5000,"5left");
         btnstart.setEnabled(false);
 
 
     }
 
+    //ne kadar süre sonra hangi sesi çalacağımızı task olarak kaydeder
+    // ve zamanı geldiğinde servisi başlatır
     public void startTimerForSound(long left,String soundType){
         timer1 = new Timer();
         final String msoundType = soundType;
@@ -115,6 +126,7 @@ public class StopWatchAct extends AppCompatActivity {
     }
 
     public void stop(View v){
+        baslatBoolean=true;
         //ending animation
         icanchor.clearAnimation();
         btnstart.animate().alpha(1).setDuration(300).start();

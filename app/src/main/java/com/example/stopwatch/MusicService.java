@@ -27,11 +27,16 @@ public class MusicService extends Service {
 
         String soundType = intent.getStringExtra("soundType");
         if(soundType.equals("5left")){
-            fivesecondsleft();
+            fivesecondsleftSound();
+        }
+        if(soundType.equals("firstStart")){
+            firstStartSound();
         }
 
         return START_STICKY;
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -40,7 +45,7 @@ public class MusicService extends Service {
         super.onDestroy();
     }
 
-    public void fivesecondsleft(){
+    public void fivesecondsleftSound(){
         mp = MediaPlayer.create(MusicService.this,R.raw.say5);
         mp.start();
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -52,6 +57,11 @@ public class MusicService extends Service {
 
             }
         });
+    }
+    //ilk başlanguç sesini çal
+    public void firstStartSound() {
+        mp = MediaPlayer.create(MusicService.this,R.raw.aktolga1);
+        mp.start();
     }
 
 }
