@@ -17,11 +17,12 @@ public class SettingsScreen extends AppCompatActivity {
 
     NumberPicker restNumberPicker;
     TextView restDurationText;
+    TextView switchsoundtext,switchvibrationtext,switchaktolgamodtext;
     int restDurationValue;
     public static int defaultValue = 10;
     //switches
-    Switch switchaktolga,switchvibration,switchsound;
-    Boolean booleanaktolga,booleanvibration,booleansound;
+    public Switch switchaktolga,switchvibration,switchsound;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,17 +41,42 @@ public class SettingsScreen extends AppCompatActivity {
                 restDurationText.setText("Rest Duration: " + restDurationValue );
             }
         });
+        //switch tanımlamaları
         switchaktolga = findViewById(R.id.aktolgamod_switch);
         switchsound = findViewById(R.id.sound_switch);
         switchvibration = findViewById(R.id.vibration_switch);
+        //switch text tanımlamaları
+        switchsoundtext = findViewById(R.id.switch_sound_text);
+        switchvibrationtext=findViewById(R.id.switch_vibration_text);
+        switchaktolgamodtext = findViewById(R.id.switch_aktolgamod_text);
+        //--------------Değiştirilmemişse true, değiştirilmişse değerini ver----
+        if(MediaController.booleansound!=null){
+            switchsound.setChecked(MediaController.booleansound);
+        }else{
+            switchsound.setChecked(MediaController.booleansound);
+        }
+
+        if(MediaController.booleanvibration!=null){
+            switchvibration.setChecked(MediaController.booleanvibration);
+        }else{
+            switchvibration.setChecked(MediaController.booleanvibration);
+        }
+        if(MediaController.booleanaktolga!=null){
+            switchaktolga.setChecked(MediaController.booleanvibration);
+        }else{
+            switchaktolga.setChecked(MediaController.booleanvibration);
+        }
 
         switchaktolga.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    booleanaktolga=true;
+                    MediaController.booleanaktolga=true;
+                    switchaktolgamodtext.setText("Serdar Aktolga Mod On");
+
                 }else{
-                    booleanaktolga=false;
+                    MediaController.booleanaktolga=false;
+                    switchaktolgamodtext.setText("Serdar Aktolga Mod Off");
                 }
             }
         });
@@ -60,9 +86,11 @@ public class SettingsScreen extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    booleanvibration=true;
+                    MediaController.booleanvibration=true;
+                    switchvibrationtext.setText("Vibration On");
                 }else{
-                    booleanvibration=false;
+                    MediaController.booleanvibration=false;
+                    switchvibrationtext.setText("Vibration Off");
                 }
             }
         });
@@ -71,19 +99,22 @@ public class SettingsScreen extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    booleansound=true;
+                    MediaController.booleansound=true;
+                    switchsoundtext.setText("Sound On");
                 }else{
-                    booleansound=false;
+                    MediaController.booleansound=false;
+                    switchsoundtext.setText("Sound Off");
                 }
             }
         });
 
     }
-    public void save(View v){
+    public void save(View v) {
         finish();
-        startActivity(new Intent(this,StopWatchAct.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                .putExtra("restDuration",restDurationValue)
+        startActivity(new Intent(this, StopWatchAct.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .putExtra("restDuration", restDurationValue)
         );
+
     }
 }

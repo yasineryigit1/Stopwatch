@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -65,6 +66,19 @@ public class StopWatchAct extends AppCompatActivity {
         //Stop butonu start'a basılmadan önce tıklanılamaz
         btnstop.setAlpha(0);
 
+        if(MediaController.booleansound==null){
+            MediaController.booleansound=true;
+        }
+        if(MediaController.booleanvibration==null){
+            MediaController.booleanvibration=true;
+        }
+        if(MediaController.booleanaktolga==null){
+            MediaController.booleanaktolga=true;
+        }
+
+        Log.d(TAG, "onCreate: booleansound geldi: "+MediaController.booleansound);
+        Log.d(TAG, "onCreate: booleanvibration geldi: "+MediaController.booleanvibration);
+
 
 
 
@@ -95,10 +109,10 @@ public class StopWatchAct extends AppCompatActivity {
     //uygulamadan çıktıysa 0 la
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //super.onBackPressed();
         Log.d(TAG, "onBackPressed: worked");
         //ChronometerHelper.destroyChronometer(chronometer,this);
-
+        finishAlert();
 
 
     }
@@ -129,6 +143,10 @@ public class StopWatchAct extends AppCompatActivity {
 
     //Finish button with alert dialog
     public void finishTraining(View v){
+        finishAlert();
+    }
+
+    public void finishAlert(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Finish");
         alert.setMessage("Are you sure to finish training?");
@@ -144,8 +162,6 @@ public class StopWatchAct extends AppCompatActivity {
             }
         });
         alert.show();
-
-
     }
 
     public void start(View v){
@@ -185,7 +201,7 @@ public class StopWatchAct extends AppCompatActivity {
         restCountdownText.setVisibility(View.VISIBLE);
         restDurationInMilliSeconds=restDurationSecond*1000;
         //başlar başlamaz milisaniyede başlayacak, firstStart kodlu soundu çalacak
-        startTimerForSound(0000,"firstStart");
+        startTimerForSound(0000,"firstStart",MediaController.booleansound,MediaController.booleanvibration);
 
         //her başlatmada sıfırdan başla
         countDownTimer = new CountDownTimer(restDurationInMilliSeconds,1000) {
@@ -200,10 +216,13 @@ public class StopWatchAct extends AppCompatActivity {
                 timeLeftText+=seconds;
                 restCountdownText.setText(timeLeftText);
                 //5.saniyede 5left soundu çal
-                if(seconds==5){
-                    startTimerForSound(0000,"5left");
-
+                if(seconds==5){//müzik çal
+                    startTimerForSound(0000,"5left",MediaController.booleansound,MediaController.booleanvibration);
                 }
+                if(seconds==0){
+                    MusicService.vibrate(MediaController.booleanvibration);
+                }
+
             }
 
             @Override
@@ -228,14 +247,19 @@ public class StopWatchAct extends AppCompatActivity {
 
     //ne kadar süre sonra hangi sesi çalacağımızı task olarak kaydeder
     // ve zamanı geldiğinde servisi başlatır
-    public void startTimerForSound(long left,String soundType){
+    public void startTimerForSound(long left, String soundType, final boolean boolsound, final boolean boolvibration){
         timer1 = new Timer();
         final String msoundType = soundType;
         final TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 //Toast.makeText(getApplicationContext(), "3 seconds", Toast.LENGTH_SHORT).show();
-                startService(new Intent(StopWatchAct.this,MusicService.class).putExtra("soundType",msoundType));
+                    startService(new Intent(StopWatchAct.this,MusicService.class)
+                            .putExtra("soundType",msoundType)
+                            .putExtra("boolvibration",boolvibration)
+                            .putExtra("boolsound",boolsound)
+                    );
+
             }
         };
         timer1.schedule(task, left);

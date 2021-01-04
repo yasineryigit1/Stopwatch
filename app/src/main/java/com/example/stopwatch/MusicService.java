@@ -11,9 +11,10 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 public class MusicService extends Service {
-    Vibrator vibrator;
-    public static MediaPlayer mp;
+    public static Vibrator vibrator;
+    public static MediaPlayer mp,mp1;
     private static final String TAG = "MusicService";
+    Boolean boolsound,boolvibration;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -26,11 +27,16 @@ public class MusicService extends Service {
         Log.d(TAG, "onStartCommand: geldi ");
 
         String soundType = intent.getStringExtra("soundType");
-        if(soundType.equals("5left")){
-            fivesecondsleftSound();
+         boolsound= intent.getBooleanExtra("boolsound",true);
+         boolvibration = intent.getBooleanExtra("boolvibration",true);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+         if(soundType.equals("5left")){
+            fivesecondsleftSound(boolsound);
+
         }
         if(soundType.equals("firstStart")){
-            firstStartSound();
+            firstStartSound(boolsound);
+
         }
 
         return START_STICKY;
@@ -45,23 +51,32 @@ public class MusicService extends Service {
         super.onDestroy();
     }
 
-    public void fivesecondsleftSound(){
-        mp = MediaPlayer.create(MusicService.this,R.raw.say5);
-        mp.start();
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                    System.out.println("kosula geldi");
-                    vibrator = (Vibrator) getSystemService(MusicService.this.VIBRATOR_SERVICE);
-                    vibrator.vibrate(1000);
+    public void fivesecondsleftSound(Boolean boolsound){
+        if(boolsound){//ses açıksa çaş
+            //Log.d(TAG, "fivesecondsleftSound: çalmadan önce boolsound geldi"+boolsound);
+            mp1 = MediaPlayer.create(MusicService.this,R.raw.say5);
+            mp1.start();
+        }
 
-            }
-        });
+
+
     }
+
+
     //ilk başlanguç sesini çal
-    public void firstStartSound() {
-        mp = MediaPlayer.create(MusicService.this,R.raw.aktolga1);
-        mp.start();
+    public void firstStartSound(Boolean boolsound) {
+        if (boolsound) {
+            Log.d(TAG, "firstStartSound: çalmadan önce boolsound geldi"+boolsound);
+            mp = MediaPlayer.create(MusicService.this,R.raw.aktolga1);
+            mp.start();
+        }
+
+    }
+
+    public static void vibrate(Boolean boolvibration) {
+        if(boolvibration){
+            vibrator.vibrate(1000);
+        }
     }
 
 }

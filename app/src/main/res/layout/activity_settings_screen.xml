@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
+
         android:enabled="true"
-        android:saveEnabled="true"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.748" />
 
     <TextView
-        android:id="@+id/aktolgamod_switch_text"
+        android:id="@+id/switch_aktolgamod_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -44,8 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
+
         android:enabled="true"
-        android:saveEnabled="true"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.803" />
     <TextView
-        android:id="@+id/vibration_switch_text"
+        android:id="@+id/switch_vibration_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -74,8 +74,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
+
         android:enabled="true"
-        android:saveEnabled="true"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.865" />
     <TextView
-        android:id="@+id/sound_switch_text"
+        android:id="@+id/switch_sound_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
