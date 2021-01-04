@@ -5,7 +5,7 @@
     >
 
     <translate
-        android:fromYDelta="400"
+        android:fromYDelta="-400"
         android:toYDelta="0"
         />
 

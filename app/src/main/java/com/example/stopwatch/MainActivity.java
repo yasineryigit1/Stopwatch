@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,13 +54,27 @@ public class MainActivity extends AppCompatActivity {
         btnget.setTypeface(MMedium);
     }
 
+    @Override
+    public boolean onKeyDown (int keyCode, KeyEvent event) {
+        // This is the center button for headphones
+        if (event.getKeyCode() == KeyEvent.KEYCODE_HEADSETHOOK) {
+            Toast.makeText(MainActivity.this, "BUTTON PRESSED!", Toast.LENGTH_SHORT).show();
+            btnget.performClick();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
     public void getStarted(View v){
         Intent i1 = new Intent(MainActivity.this,StopWatchAct.class);
         i1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
         startActivity(i1);
     }
 
     public void getSettings(View v){
-        startActivity(new Intent(MainActivity.this,SettingsScreen.class));
+        startActivity(new Intent(MainActivity.this,SettingsScreen.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 }

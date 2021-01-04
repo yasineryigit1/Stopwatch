@@ -16,14 +16,17 @@ public class SettingsScreen extends AppCompatActivity {
     NumberPicker restNumberPicker;
     TextView restDurationText;
     int restDurationValue;
+    public static int defaultValue = 10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
         restNumberPicker = findViewById(R.id.restNumberPicker);
         restDurationText=findViewById(R.id.restDurationText);
-        restNumberPicker.setMinValue(1);
-        restNumberPicker.setMaxValue(999);
+        restNumberPicker.setMinValue(10);
+        restNumberPicker.setMaxValue(500);
+        restNumberPicker.setValue(defaultValue);
+        restDurationText.setText("Rest Duration: " + defaultValue);
         restNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -35,8 +38,9 @@ public class SettingsScreen extends AppCompatActivity {
 
     }
     public void save(View v){
+        finish();
         startActivity(new Intent(this,StopWatchAct.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .putExtra("restDuration",restDurationValue)
         );
     }

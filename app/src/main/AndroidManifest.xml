@@ -27,6 +27,11 @@
         </activity>
 
         <service android:name=".MusicService" />
+        <receiver android:name=".HeadsetBroadcastingClass">
+            <intent-filter android:priority="999999999">
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

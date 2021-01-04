@@ -8,45 +8,18 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 import java.security.Key;
+import java.sql.SQLOutput;
 
 public class HeadsetBroadcastingClass extends BroadcastReceiver {
     public HeadsetBroadcastingClass() {
         super();
+        System.out.println("initialized");
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        System.out.println("onReceive'e geldi");
-        String intentAction = intent.getAction();
-        //intent filter action media button ise
-        if (Intent.ACTION_MEDIA_BUTTON.equals(intentAction)) {
-            KeyEvent event = (KeyEvent)
-                    intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
-
-            if (event == null) {
-                return;
-            }
-
-            int keycode = event.getKeyCode();
-            int action = event.getAction();
-            long eventtime = event.getEventTime();
-
-            if (keycode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE || keycode == KeyEvent.KEYCODE_HEADSETHOOK) {
-                if (action == KeyEvent.ACTION_DOWN) {
-                    System.out.println("isleme geldi");
-                    Toast.makeText(context, "Clicked receiverdan", Toast.LENGTH_SHORT).show();
-
-                    if (isOrderedBroadcast()) {
-                        abortBroadcast();
-                    }
-                }
-            }
-        }
+        Toast.makeText(context, "action detected", Toast.LENGTH_SHORT).show();
     }
+
 }
-
-
-
-
-
 
