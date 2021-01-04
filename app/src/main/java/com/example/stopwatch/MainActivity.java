@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        makeStyles();
+    }
+
+    public void makeStyles(){
 
         tvSplash=findViewById(R.id.tvSplash);
         tvSubSplash=findViewById(R.id.tvSubSplash);
@@ -54,27 +59,19 @@ public class MainActivity extends AppCompatActivity {
         btnget.setTypeface(MMedium);
     }
 
-    @Override
-    public boolean onKeyDown (int keyCode, KeyEvent event) {
-        // This is the center button for headphones
-        if (event.getKeyCode() == KeyEvent.KEYCODE_HEADSETHOOK) {
-            Toast.makeText(MainActivity.this, "BUTTON PRESSED!", Toast.LENGTH_SHORT).show();
-            btnget.performClick();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-
     public void getStarted(View v){
-        Intent i1 = new Intent(MainActivity.this,StopWatchAct.class);
-        i1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         finish();
-        startActivity(i1);
+        startActivity(new Intent(this,StopWatchAct.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+        );
     }
 
-    public void getSettings(View v){
-        startActivity(new Intent(MainActivity.this,SettingsScreen.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK));
+    public void getSettings(View  v){
+        finish();
+        startActivity(new Intent(this,SettingsScreen.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+        );
     }
 }

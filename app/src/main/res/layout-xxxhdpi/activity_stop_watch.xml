@@ -54,6 +54,20 @@
         app:layout_constraintVertical_bias="0.036"
         app:srcCompat="@drawable/hourglass" />
 
+    <Chronometer
+        android:id="@+id/totalchronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02" />
+
     <Button
         android:id="@+id/btnfinish"
         android:layout_width="300dp"

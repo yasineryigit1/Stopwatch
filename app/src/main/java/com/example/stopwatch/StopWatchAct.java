@@ -41,8 +41,7 @@ public class StopWatchAct extends AppCompatActivity {
     long restDurationInMilliSeconds;//settingsten geldi
     boolean isRestTimerRunning;
     //chronometer
-    long startTime;
-
+    Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,8 @@ public class StopWatchAct extends AppCompatActivity {
         setContentView(R.layout.activity_stop_watch);
         headsetBroadcastingClass = new HeadsetBroadcastingClass();
         makeStyle();
+        //chronometer
+        chronometer=findViewById(R.id.totalchronometer);
 
         //restDuration part
         restCountdownText = findViewById(R.id.restCountdownText);
@@ -62,6 +63,8 @@ public class StopWatchAct extends AppCompatActivity {
         btnstop.setAlpha(0);
 
 
+
+
     }
 
 
@@ -70,10 +73,9 @@ public class StopWatchAct extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ChronometerHelper.startChronometer(chronometer,this);
 
-        IntentFilter filter = new IntentFilter(Intent.ACTION_MEDIA_BUTTON);
 
-        registerReceiver(headsetBroadcastingClass,filter);
 
     }
 
@@ -88,10 +90,11 @@ public class StopWatchAct extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        ChronometerHelper.destroyChronometer(chronometer,this);
 
 
     }
-    /*
+
     @Override
     public boolean onKeyDown (int keyCode, KeyEvent event) {
         // This is the center button for headphones
@@ -107,11 +110,12 @@ public class StopWatchAct extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-*/
+
 
 
 
     public void settingsButton(View v){
+        ChronometerHelper.stopChronometer(chronometer,this);
         startActivity(new Intent(StopWatchAct.this,SettingsScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
