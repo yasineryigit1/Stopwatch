@@ -1,9 +1,11 @@
 package com.example.stopwatch;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.BlockingDeque;
 
 public class StopWatchAct extends AppCompatActivity {
     HeadsetBroadcastingClass headsetBroadcastingClass;
@@ -42,18 +45,18 @@ public class StopWatchAct extends AppCompatActivity {
     boolean isRestTimerRunning;
     //chronometer
     Chronometer chronometer;
+    private static final String TAG = "StopWatchAct";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_watch);
         headsetBroadcastingClass = new HeadsetBroadcastingClass();
-        makeStyle();
         //chronometer
         chronometer=findViewById(R.id.totalchronometer);
-
         //restDuration part
         restCountdownText = findViewById(R.id.restCountdownText);
+        makeStyle();
         Intent intent = getIntent();
         restDurationSecond = intent.getIntExtra("restDuration",SettingsScreen.defaultValue);//kaçtan geri sayacağı (second)
         restDurationInMilliSeconds = restDurationSecond*1000; //kaçtan geri sayacağı (millisecond)
@@ -73,6 +76,7 @@ public class StopWatchAct extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume: worked");
         ChronometerHelper.startChronometer(chronometer,this);
 
 
@@ -83,6 +87,8 @@ public class StopWatchAct extends AppCompatActivity {
     //başka aktiviteye geçerken elapsetTime'ı al kaydet
     @Override
     protected void onPause() {
+        Log.d(TAG, "onPause: a geldi");
+        ChronometerHelper.stopChronometer(chronometer,this);
         super.onPause();
 
     }
@@ -90,7 +96,9 @@ public class StopWatchAct extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ChronometerHelper.destroyChronometer(chronometer,this);
+        Log.d(TAG, "onBackPressed: worked");
+        //ChronometerHelper.destroyChronometer(chronometer,this);
+
 
 
     }
@@ -115,8 +123,29 @@ public class StopWatchAct extends AppCompatActivity {
 
 
     public void settingsButton(View v){
-        ChronometerHelper.stopChronometer(chronometer,this);
+        //ChronometerHelper.stopChronometer(chronometer,this);
         startActivity(new Intent(StopWatchAct.this,SettingsScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+
+    //Finish button with alert dialog
+    public void finishTraining(View v){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Finish");
+        alert.setMessage("Are you sure to finish training?");
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alert.show();
+
+
     }
 
     public void start(View v){
@@ -244,6 +273,7 @@ public class StopWatchAct extends AppCompatActivity {
         icanchor.startAnimation(atg);
 
         hourglass.startAnimation(btgone);
+        chronometer.startAnimation(btgone);
         btnstart.startAnimation(btgone);
         btnstop.startAnimation(btgtwo);
 
