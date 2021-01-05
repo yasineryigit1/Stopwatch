@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import static com.example.stopwatch.StopWatchAct.stopMusicService;
+
 public class SettingsScreen extends AppCompatActivity {
 
     NumberPicker restNumberPicker;
@@ -28,6 +30,7 @@ public class SettingsScreen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
+        stopMusicService();//Settings ekranına geçtiği anda tüm soundları durdur
         restNumberPicker = findViewById(R.id.restNumberPicker);
         restDurationText=findViewById(R.id.restDurationText);
         restNumberPicker.setMinValue(10);
@@ -62,9 +65,9 @@ public class SettingsScreen extends AppCompatActivity {
             switchvibration.setChecked(MediaController.booleanvibration);
         }
         if(MediaController.booleanaktolga!=null){
-            switchaktolga.setChecked(MediaController.booleanvibration);
+            switchaktolga.setChecked(MediaController.booleanaktolga);
         }else{
-            switchaktolga.setChecked(MediaController.booleanvibration);
+            switchaktolga.setChecked(MediaController.booleanaktolga);
         }
 
         switchaktolga.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

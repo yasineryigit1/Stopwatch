@@ -191,6 +191,7 @@ public class StopWatchAct extends AppCompatActivity {
 
         timer1.cancel();
         MusicService.mp.stop();
+
     }
 
 
@@ -201,7 +202,10 @@ public class StopWatchAct extends AppCompatActivity {
         restCountdownText.setVisibility(View.VISIBLE);
         restDurationInMilliSeconds=restDurationSecond*1000;
         //başlar başlamaz milisaniyede başlayacak, firstStart kodlu soundu çalacak
-        startTimerForSound(0000,"firstStart",MediaController.booleansound,MediaController.booleanvibration);
+        if(MediaController.booleanaktolga){//mod switchi açıksa
+            startTimerForSound(0000,"firstStart",MediaController.booleansound,MediaController.booleanvibration);
+        }
+
 
         //her başlatmada sıfırdan başla
         countDownTimer = new CountDownTimer(restDurationInMilliSeconds,1000) {
