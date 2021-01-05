@@ -56,18 +56,18 @@ public class SettingsScreen extends AppCompatActivity {
         if(MediaController.booleansound!=null){
             switchsound.setChecked(MediaController.booleansound);
         }else{
-            switchsound.setChecked(MediaController.booleansound);
+            switchsound.setChecked(true);
         }
 
         if(MediaController.booleanvibration!=null){
             switchvibration.setChecked(MediaController.booleanvibration);
         }else{
-            switchvibration.setChecked(MediaController.booleanvibration);
+            switchvibration.setChecked(true);
         }
         if(MediaController.booleanaktolga!=null){
             switchaktolga.setChecked(MediaController.booleanaktolga);
         }else{
-            switchaktolga.setChecked(MediaController.booleanaktolga);
+            switchaktolga.setChecked(true);
         }
 
         switchaktolga.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -103,10 +103,10 @@ public class SettingsScreen extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     MediaController.booleansound=true;
-                    switchsoundtext.setText("Sound On");
+                    switchsoundtext.setText("Sound Notification On");
                 }else{
                     MediaController.booleansound=false;
-                    switchsoundtext.setText("Sound Off");
+                    switchsoundtext.setText("Sound Notification Off");
                 }
             }
         });

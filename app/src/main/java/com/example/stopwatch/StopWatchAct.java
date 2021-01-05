@@ -154,6 +154,7 @@ public class StopWatchAct extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
+                stopMusicService();
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -167,6 +168,7 @@ public class StopWatchAct extends AppCompatActivity {
     public void start(View v){
         //start'a tıklandıktan sonra start butonu 300ms sonra -80 aşağı doğru kayarak tıklanamaz hale gelir
         btnstart.animate().alpha(0).translationY(-80).setDuration(300).start();
+        btnstart.setClickable(false);
         //Stop butonu start'a tıkladıktan 300ms sonra clickable hale gelir
         btnstop.animate().alpha(1).setDuration(300).start();
         startRestTimer();
@@ -181,7 +183,8 @@ public class StopWatchAct extends AppCompatActivity {
         btnstop.animate().alpha(0).setDuration(300).start();
         restCountdownText.setVisibility(View.INVISIBLE);
         stopMusicService();//müzik servisini durdur
-        btnstart.setEnabled(true);
+       // btnstart.setEnabled(true);
+        btnstart.setClickable(true);
         stopRestTimer();
 
     }
@@ -189,8 +192,20 @@ public class StopWatchAct extends AppCompatActivity {
     public static void stopMusicService (){
         //çalınacak soundları iptal et
 
-        timer1.cancel();
-        MusicService.mp.stop();
+        if(MusicService.mp!=null){
+            if(MusicService.mp.isPlaying()){
+                MusicService.mp.stop();
+            }
+
+        }
+
+        if(MusicService.mp1!=null){
+            if(MusicService.mp1.isPlaying()){
+                MusicService.mp1.stop();
+            }
+
+        }
+
 
     }
 
@@ -203,9 +218,13 @@ public class StopWatchAct extends AppCompatActivity {
         restDurationInMilliSeconds=restDurationSecond*1000;
         //başlar başlamaz milisaniyede başlayacak, firstStart kodlu soundu çalacak
         if(MediaController.booleanaktolga){//mod switchi açıksa
-            startTimerForSound(0000,"firstStart",MediaController.booleansound,MediaController.booleanvibration);
+            //startTimerForSound(0000,"firstStart",MediaController.booleansound,MediaController.booleanvibration);
+            startService(new Intent(StopWatchAct.this,MusicService.class)
+                    .putExtra("soundType","firstStart")
+                    .putExtra("boolvibration",MediaController.booleanvibration)
+                    .putExtra("boolsound",MediaController.booleansound)
+            );
         }
-
 
         //her başlatmada sıfırdan başla
         countDownTimer = new CountDownTimer(restDurationInMilliSeconds,1000) {
@@ -221,7 +240,13 @@ public class StopWatchAct extends AppCompatActivity {
                 restCountdownText.setText(timeLeftText);
                 //5.saniyede 5left soundu çal
                 if(seconds==5){//müzik çal
-                    startTimerForSound(0000,"5left",MediaController.booleansound,MediaController.booleanvibration);
+                    //startTimerForSound(0000,"5left",MediaController.booleansound,MediaController.booleanvibration);
+
+                    startService(new Intent(StopWatchAct.this,MusicService.class)
+                            .putExtra("soundType","5left")
+                            .putExtra("boolvibration",MediaController.booleanvibration)
+                            .putExtra("boolsound",MediaController.booleansound)
+                    );
                 }
                 if(seconds==0){
                     MusicService.vibrate(MediaController.booleanvibration);
@@ -236,6 +261,7 @@ public class StopWatchAct extends AppCompatActivity {
                 btnstop.animate().alpha(0).setDuration(300).start();
                 //süre bitince start butonu görünür yap
                 btnstart.animate().alpha(1).setDuration(300).start();
+                btnstart.setClickable(true);
                 isRestTimerRunning=false;
 
             }
@@ -249,26 +275,6 @@ public class StopWatchAct extends AppCompatActivity {
         setRestText();
     }
 
-    //ne kadar süre sonra hangi sesi çalacağımızı task olarak kaydeder
-    // ve zamanı geldiğinde servisi başlatır
-    public void startTimerForSound(long left, String soundType, final boolean boolsound, final boolean boolvibration){
-        timer1 = new Timer();
-        final String msoundType = soundType;
-        final TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                //Toast.makeText(getApplicationContext(), "3 seconds", Toast.LENGTH_SHORT).show();
-                    startService(new Intent(StopWatchAct.this,MusicService.class)
-                            .putExtra("soundType",msoundType)
-                            .putExtra("boolvibration",boolvibration)
-                            .putExtra("boolsound",boolsound)
-                    );
-
-            }
-        };
-        timer1.schedule(task, left);
-
-    }
 
     public void setRestText(){
         int minutes =(int)restDurationInMilliSeconds/60000;
