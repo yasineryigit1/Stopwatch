@@ -66,13 +66,16 @@ public class StopWatchAct extends AppCompatActivity {
 
         sp=getSharedPreferences("rest",Context.MODE_PRIVATE);
         restDurationSecond = sp.getInt("restDuration",SettingsScreen.defaultValue);
+        MediaController.booleansound=sp.getBoolean("boolsound",true);
+        MediaController.booleanvibration=sp.getBoolean("boolvibration",true);
+        MediaController.booleanaktolga=sp.getBoolean("boolaktolga",true);
         restDurationInMilliSeconds = restDurationSecond*1000; //kaçtan geri sayacağı (millisecond)
         restCountdownText.setVisibility(View.INVISIBLE);
 
         //Stop butonu start'a basılmadan önce tıklanılamaz
         btnstop.setAlpha(0);
 
-
+        /*
         if(MediaController.booleansound==null){
             MediaController.booleansound=true;
         }
@@ -82,9 +85,10 @@ public class StopWatchAct extends AppCompatActivity {
         if(MediaController.booleanaktolga==null){
             MediaController.booleanaktolga=true;
         }
-
-        Log.d(TAG, "onCreate: booleansound geldi: "+MediaController.booleansound);
-        Log.d(TAG, "onCreate: booleanvibration geldi: "+MediaController.booleanvibration);
+*/
+        Log.d(TAG, "onCreate: booleansound gelen: "+MediaController.booleansound);
+        Log.d(TAG, "onCreate: booleanvibration gelen: "+MediaController.booleanvibration);
+        Log.d(TAG, "onCreate: booleanvibration gelen: "+MediaController.booleanvibration);
 
 
 
@@ -189,9 +193,9 @@ public class StopWatchAct extends AppCompatActivity {
         btnstart.animate().alpha(1).setDuration(300).start();
         btnstop.animate().alpha(0).setDuration(300).start();
         restCountdownText.setVisibility(View.INVISIBLE);
-        stopMusicService();//müzik servisini durdur
        // btnstart.setEnabled(true);
         btnstart.setClickable(true);
+        stopMusicService();//müzik servisini durdur
         stopRestTimer();
 
     }
@@ -326,12 +330,7 @@ public class StopWatchAct extends AppCompatActivity {
 
         btnstart.setTypeface(MMedium);
 
-
-
     }
-
-
-
 
 }
 

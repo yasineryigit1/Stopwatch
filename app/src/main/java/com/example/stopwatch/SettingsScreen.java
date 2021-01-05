@@ -8,7 +8,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -22,21 +26,24 @@ public class SettingsScreen extends AppCompatActivity {
     NumberPicker restNumberPicker;
     boolean isNumberPickerChanged;
     TextView restDurationText;
+    ImageView settingsSplash;
     TextView switchsoundtext,switchvibrationtext,switchaktolgamodtext;
+    Button btnsave;
     int restDurationValue;
     public static int defaultValue = 10;
     //switches
     public Switch switchaktolga,switchvibration,switchsound;
     SharedPreferences sp;
+    //Animation
+    Animation atg,btgone,btgtwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
         stopMusicService();//Settings ekranına geçtiği anda tüm soundları durdur
+        makeStyles();
         isNumberPickerChanged=false;
-        restNumberPicker = findViewById(R.id.restNumberPicker);
-        restDurationText=findViewById(R.id.restDurationText);
         restNumberPicker.setMinValue(10);
         restNumberPicker.setMaxValue(500);
         //restDurationSecond değiştirildiyse yani default değilse, yeni değerini ata o zaman
@@ -53,14 +60,7 @@ public class SettingsScreen extends AppCompatActivity {
                 //restDurationText.setText("Rest Duration: " + restDurationValue );
             }
         });
-        //switch tanımlamaları
-        switchaktolga = findViewById(R.id.aktolgamod_switch);
-        switchsound = findViewById(R.id.sound_switch);
-        switchvibration = findViewById(R.id.vibration_switch);
-        //switch text tanımlamaları
-        switchsoundtext = findViewById(R.id.switch_sound_text);
-        switchvibrationtext=findViewById(R.id.switch_vibration_text);
-        switchaktolgamodtext = findViewById(R.id.switch_aktolgamod_text);
+
         //--------------Değiştirilmemişse true, değiştirilmişse değerini ver----
         if(MediaController.booleansound!=null){
             switchsound.setChecked(MediaController.booleansound);
@@ -126,8 +126,53 @@ public class SettingsScreen extends AppCompatActivity {
         if(isNumberPickerChanged){//değer değiştirildiyse yeni sayıyı kaydet
             sp.edit().putInt("restDuration",restDurationValue).apply();
         }
+        //save'e basınca ayarları kaydet
+        sp.edit().putBoolean("boolsound",MediaController.booleansound).apply();
+        sp.edit().putBoolean("boolvibration",MediaController.booleanvibration).apply();
+        sp.edit().putBoolean("boolaktolga",MediaController.booleanaktolga).apply();
         finish();
+    }
+
+
+    public void makeStyles(){
+        //ImageView
+        settingsSplash = findViewById(R.id.settingsSplash);
+        //number picker | text
+        restNumberPicker = findViewById(R.id.restNumberPicker);
+        restDurationText=findViewById(R.id.restDurationText);
+        //switch tanımlamaları
+        switchaktolga = findViewById(R.id.aktolgamod_switch);
+        switchsound = findViewById(R.id.sound_switch);
+        switchvibration = findViewById(R.id.vibration_switch);
+        //switch text tanımlamaları
+        switchsoundtext = findViewById(R.id.switch_sound_text);
+        switchvibrationtext=findViewById(R.id.switch_vibration_text);
+        switchaktolgamodtext = findViewById(R.id.switch_aktolgamod_text);
+        //Button
+        btnsave = findViewById(R.id.btnsave);
+
+        //animation
+        atg= AnimationUtils.loadAnimation(this,R.anim.atg);
+        btgone=AnimationUtils.loadAnimation(this,R.anim.btgone);
+        btgtwo=AnimationUtils.loadAnimation(this,R.anim.btgtwo);
+
+        settingsSplash.startAnimation(atg);
+
+        restNumberPicker.startAnimation(btgone);
+        restDurationText.startAnimation(btgone);
+        switchsound.startAnimation(btgone);
+        switchvibration.startAnimation(btgone);
+        switchaktolga.startAnimation(btgone);
+        switchsoundtext.startAnimation(btgone);
+        switchvibrationtext.startAnimation(btgone);
+        switchaktolgamodtext.startAnimation(btgone);
+
+        btnsave.startAnimation(btgtwo);
+
+
+
 
 
     }
+
 }

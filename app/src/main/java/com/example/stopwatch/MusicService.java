@@ -47,9 +47,16 @@ public class MusicService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy: ");
-        mp.stop();
         super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+        if(mp!=null){
+            mp.stop();
+        }
+        if(mp1!=null){
+            mp1.stop();
+        }
+
+
     }
 
     public void fivesecondsleftSound(Boolean boolsound){
