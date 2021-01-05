@@ -62,16 +62,14 @@ public class MainActivity extends AppCompatActivity {
     public void getStarted(View v){
         finish();
         startActivity(new Intent(this,StopWatchAct.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK)
-
+                .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         );
     }
 
     public void getSettings(View  v){
         finish();
         startActivity(new Intent(this,SettingsScreen.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK)
-
+                .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         );
     }
 }

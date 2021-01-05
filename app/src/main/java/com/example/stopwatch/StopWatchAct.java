@@ -53,6 +53,7 @@ public class StopWatchAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_watch);
         headsetBroadcastingClass = new HeadsetBroadcastingClass();
+        Log.d(TAG, "onCreate: worked");
         //chronometer
         chronometer=findViewById(R.id.totalchronometer);
         //restDuration part
@@ -223,6 +224,7 @@ public class StopWatchAct extends AppCompatActivity {
                     .putExtra("soundType","firstStart")
                     .putExtra("boolvibration",MediaController.booleanvibration)
                     .putExtra("boolsound",MediaController.booleansound)
+                    .putExtra("boolaktolga",MediaController.booleanaktolga)
             );
         }
 

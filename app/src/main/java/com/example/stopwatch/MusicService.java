@@ -14,7 +14,7 @@ public class MusicService extends Service {
     public static Vibrator vibrator;
     public static MediaPlayer mp,mp1;
     private static final String TAG = "MusicService";
-    Boolean boolsound,boolvibration;
+    Boolean boolsound,boolvibration,boolaktolga;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -29,13 +29,14 @@ public class MusicService extends Service {
         String soundType = intent.getStringExtra("soundType");
          boolsound= intent.getBooleanExtra("boolsound",true);
          boolvibration = intent.getBooleanExtra("boolvibration",true);
-        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+         boolaktolga = intent.getBooleanExtra("boolaktolga",true);
+         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
          if(soundType.equals("5left")){
             fivesecondsleftSound(boolsound);
 
         }
         if(soundType.equals("firstStart")){
-            firstStartSound(boolsound);
+            firstStartSound(boolaktolga);
 
         }
 
@@ -64,8 +65,8 @@ public class MusicService extends Service {
 
 
     //ilk başlanguç sesini çal
-    public void firstStartSound(Boolean boolsound) {
-        if (boolsound) {
+    public void firstStartSound(Boolean boolaktolga) {
+        if (boolaktolga) {
             Log.d(TAG, "firstStartSound: çalmadan önce boolsound geldi"+boolsound);
             mp = MediaPlayer.create(MusicService.this,R.raw.aktolga1);
             mp.start();
