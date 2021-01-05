@@ -44,13 +44,13 @@ public class SettingsScreen extends AppCompatActivity {
             defaultValue=StopWatchAct.restDurationSecond;
         }
         restNumberPicker.setValue(defaultValue);
-        restDurationText.setText("Rest Duration: " + defaultValue);
+        //restDurationText.setText("Rest Duration: " + defaultValue);
         restNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 isNumberPickerChanged=true;//değer değişti
                 restDurationValue = newVal;
-                restDurationText.setText("Rest Duration: " + restDurationValue );
+                //restDurationText.setText("Rest Duration: " + restDurationValue );
             }
         });
         //switch tanımlamaları
