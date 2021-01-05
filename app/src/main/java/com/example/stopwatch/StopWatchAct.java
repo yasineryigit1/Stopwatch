@@ -41,12 +41,14 @@ public class StopWatchAct extends AppCompatActivity {
     //countdown part
     TextView restCountdownText;
     CountDownTimer countDownTimer;
-    int restDurationSecond;//settings'den geldi (seconds) cinsinden
+    public static int restDurationSecond;//settings'den geldi (seconds) cinsinden
     long restDurationInMilliSeconds;//settingsten geldi
     boolean isRestTimerRunning;
     //chronometer
     Chronometer chronometer;
     private static final String TAG = "StopWatchAct";
+    //sharedpreferences
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,9 @@ public class StopWatchAct extends AppCompatActivity {
         restCountdownText = findViewById(R.id.restCountdownText);
         makeStyle();
         Intent intent = getIntent();
-        restDurationSecond = intent.getIntExtra("restDuration",SettingsScreen.defaultValue);//kaçtan geri sayacağı (second)
+
+        sp=getSharedPreferences("rest",Context.MODE_PRIVATE);
+        restDurationSecond = sp.getInt("restDuration",SettingsScreen.defaultValue);
         restDurationInMilliSeconds = restDurationSecond*1000; //kaçtan geri sayacağı (millisecond)
         restCountdownText.setVisibility(View.INVISIBLE);
 
@@ -92,7 +96,8 @@ public class StopWatchAct extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: worked");
-        ChronometerHelper.startChronometer(chronometer,this);
+        chronometer.start();
+        restDurationSecond = sp.getInt("restDuration",SettingsScreen.defaultValue);
 
 
 
@@ -103,7 +108,7 @@ public class StopWatchAct extends AppCompatActivity {
     @Override
     protected void onPause() {
         Log.d(TAG, "onPause: a geldi");
-        ChronometerHelper.stopChronometer(chronometer,this);
+        chronometer.stop();
         super.onPause();
 
     }
@@ -172,6 +177,8 @@ public class StopWatchAct extends AppCompatActivity {
         btnstart.setClickable(false);
         //Stop butonu start'a tıkladıktan 300ms sonra clickable hale gelir
         btnstop.animate().alpha(1).setDuration(300).start();
+        setRestText();
+        restCountdownText.setVisibility(View.VISIBLE);
         startRestTimer();
     }
 
@@ -214,8 +221,6 @@ public class StopWatchAct extends AppCompatActivity {
 
     //rest time saymaya başladı
     public void startRestTimer(){
-        setRestText();
-        restCountdownText.setVisibility(View.VISIBLE);
         restDurationInMilliSeconds=restDurationSecond*1000;
         //başlar başlamaz milisaniyede başlayacak, firstStart kodlu soundu çalacak
         if(MediaController.booleanaktolga){//mod switchi açıksa

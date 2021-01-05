@@ -2,7 +2,9 @@ package com.example.stopwatch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -24,6 +26,7 @@ public class SettingsScreen extends AppCompatActivity {
     public static int defaultValue = 10;
     //switches
     public Switch switchaktolga,switchvibration,switchsound;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,10 @@ public class SettingsScreen extends AppCompatActivity {
         restDurationText=findViewById(R.id.restDurationText);
         restNumberPicker.setMinValue(10);
         restNumberPicker.setMaxValue(500);
+        //restDurationSecond değiştirildiyse yani default değilse, yeni değerini ata o zaman
+        if(StopWatchAct.restDurationSecond!=defaultValue){
+            defaultValue=StopWatchAct.restDurationSecond;
+        }
         restNumberPicker.setValue(defaultValue);
         restDurationText.setText("Rest Duration: " + defaultValue);
         restNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -113,11 +120,10 @@ public class SettingsScreen extends AppCompatActivity {
 
     }
     public void save(View v) {
+        sp = getSharedPreferences("rest", Context.MODE_PRIVATE);
+        sp.edit().putInt("restDuration",restDurationValue).apply();
         finish();
-        startActivity(new Intent(this, StopWatchAct.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                .putExtra("restDuration", restDurationValue)
-        );
+
 
     }
 }

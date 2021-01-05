@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     TextView tvSplash, tvSubSplash;
-    Button btnget,btnSettings;
+    Button btnget;
     Animation atg,btgone,btgtwo;
     ImageView ivSplash;
     @Override
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         tvSplash=findViewById(R.id.tvSplash);
         tvSubSplash=findViewById(R.id.tvSubSplash);
         btnget=findViewById(R.id.btnfinish);
-        btnSettings = findViewById(R.id.btnSettings);
+
         ivSplash=findViewById(R.id.ivSplash);
 
         //atg objesine atg.xml'deki animasyon hareketini tanımlıyoruz
@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         tvSplash.startAnimation(btgone);
         tvSubSplash.startAnimation(btgone);
         btnget.startAnimation(btgtwo);
-        btnSettings.startAnimation(btgtwo);
 
         //fontları import ediyoruz
         Typeface MLight = Typeface.createFromAsset(getAssets(),"fonts/MLight.ttf");
