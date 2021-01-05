@@ -61,6 +61,7 @@ public class StopWatchAct extends AppCompatActivity {
         //restDuration part
         restCountdownText = findViewById(R.id.restCountdownText);
         makeStyle();
+        icanchor.startAnimation(roundingalone);//uygulama başlatıldığında yelkovanı döndür
         Intent intent = getIntent();
 
         sp=getSharedPreferences("rest",Context.MODE_PRIVATE);
@@ -70,6 +71,7 @@ public class StopWatchAct extends AppCompatActivity {
 
         //Stop butonu start'a basılmadan önce tıklanılamaz
         btnstop.setAlpha(0);
+
 
         if(MediaController.booleansound==null){
             MediaController.booleansound=true;
@@ -90,16 +92,12 @@ public class StopWatchAct extends AppCompatActivity {
     }
 
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: worked");
         chronometer.start();
         restDurationSecond = sp.getInt("restDuration",SettingsScreen.defaultValue);
-
-
 
     }
 
@@ -120,14 +118,13 @@ public class StopWatchAct extends AppCompatActivity {
         //ChronometerHelper.destroyChronometer(chronometer,this);
         finishAlert();
 
-
     }
 
     @Override
     public boolean onKeyDown (int keyCode, KeyEvent event) {
         // This is the center button for headphones
         if (event.getKeyCode() == KeyEvent.KEYCODE_HEADSETHOOK) {
-            Toast.makeText(StopWatchAct.this, "BUTTON PRESSED!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(StopWatchAct.this, "BUTTON PRESSED!", Toast.LENGTH_SHORT).show();
             if(!isRestTimerRunning){
                 btnstart.performClick();
             }
@@ -144,6 +141,7 @@ public class StopWatchAct extends AppCompatActivity {
 
     public void settingsButton(View v){
         //ChronometerHelper.stopChronometer(chronometer,this);
+        btnstop.performClick();//settings'e giderse mevcut sayacı ve zamanlanmış müzikleri kapat
         startActivity(new Intent(StopWatchAct.this,SettingsScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
@@ -160,7 +158,8 @@ public class StopWatchAct extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
-                stopMusicService();
+                stopMusicService();//müzik durdurulması için eklendi
+                stopRestTimer();    //zamanlanmış müziğin kalmaması için eklendi
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -204,14 +203,12 @@ public class StopWatchAct extends AppCompatActivity {
             if(MusicService.mp.isPlaying()){
                 MusicService.mp.stop();
             }
-
         }
 
         if(MusicService.mp1!=null){
             if(MusicService.mp1.isPlaying()){
                 MusicService.mp1.stop();
             }
-
         }
 
 
@@ -246,7 +243,7 @@ public class StopWatchAct extends AppCompatActivity {
                 timeLeftText+=seconds;
                 restCountdownText.setText(timeLeftText);
                 //5.saniyede 5left soundu çal
-                if(seconds==5){//müzik çal
+                if(minutes==0&&seconds==5){//son 5sn kala 5left soundunu çal
                     //startTimerForSound(0000,"5left",MediaController.booleansound,MediaController.booleanvibration);
 
                     startService(new Intent(StopWatchAct.this,MusicService.class)
@@ -255,7 +252,7 @@ public class StopWatchAct extends AppCompatActivity {
                             .putExtra("boolsound",MediaController.booleansound)
                     );
                 }
-                if(seconds==0){
+                if(minutes==0&&seconds==0){//süre bittiğidne
                     MusicService.vibrate(MediaController.booleanvibration);
                 }
 
@@ -277,7 +274,9 @@ public class StopWatchAct extends AppCompatActivity {
     }
 
     public void stopRestTimer(){
-        countDownTimer.cancel();
+        if(countDownTimer!=null){
+            countDownTimer.cancel();
+        }
         isRestTimerRunning = false;
         setRestText();
     }

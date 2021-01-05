@@ -28,6 +28,18 @@ public class MainActivity extends AppCompatActivity {
         makeStyles();
     }
 
+    @Override
+    public boolean onKeyDown (int keyCode, KeyEvent event) {
+        // This is the center button for headphones
+        if (event.getKeyCode() == KeyEvent.KEYCODE_HEADSETHOOK) {
+            //Toast.makeText(MainActivity.this, "BUTTON PRESSED!", Toast.LENGTH_SHORT).show();
+            btnget.performClick();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void makeStyles(){
 
         tvSplash=findViewById(R.id.tvSplash);
@@ -65,10 +77,5 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    public void getSettings(View  v){
-        finish();
-        startActivity(new Intent(this,SettingsScreen.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        );
-    }
+
 }

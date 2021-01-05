@@ -18,8 +18,9 @@ import org.w3c.dom.Text;
 import static com.example.stopwatch.StopWatchAct.stopMusicService;
 
 public class SettingsScreen extends AppCompatActivity {
-
+    //Number picker
     NumberPicker restNumberPicker;
+    boolean isNumberPickerChanged;
     TextView restDurationText;
     TextView switchsoundtext,switchvibrationtext,switchaktolgamodtext;
     int restDurationValue;
@@ -30,10 +31,10 @@ public class SettingsScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
         stopMusicService();//Settings ekranına geçtiği anda tüm soundları durdur
+        isNumberPickerChanged=false;
         restNumberPicker = findViewById(R.id.restNumberPicker);
         restDurationText=findViewById(R.id.restDurationText);
         restNumberPicker.setMinValue(10);
@@ -47,6 +48,7 @@ public class SettingsScreen extends AppCompatActivity {
         restNumberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                isNumberPickerChanged=true;//değer değişti
                 restDurationValue = newVal;
                 restDurationText.setText("Rest Duration: " + restDurationValue );
             }
@@ -121,7 +123,9 @@ public class SettingsScreen extends AppCompatActivity {
     }
     public void save(View v) {
         sp = getSharedPreferences("rest", Context.MODE_PRIVATE);
-        sp.edit().putInt("restDuration",restDurationValue).apply();
+        if(isNumberPickerChanged){//değer değiştirildiyse yeni sayıyı kaydet
+            sp.edit().putInt("restDuration",restDurationValue).apply();
+        }
         finish();
 
 

@@ -121,8 +121,9 @@
 
     <ImageView
         android:id="@+id/settingsicon"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"
         android:onClick="settingsButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,15 +135,16 @@
 
     <ImageView
         android:id="@+id/exitbutton"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="1dp"
         android:onClick="finishTraining"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021"
+        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/exitbutton" />
 
 
