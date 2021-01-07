@@ -56,8 +56,7 @@ public class StopWatchAct extends AppCompatActivity {
         setContentView(R.layout.activity_stop_watch);
         headsetBroadcastingClass = new HeadsetBroadcastingClass();
         Log.d(TAG, "onCreate: worked");
-        //chronometer
-        chronometer=findViewById(R.id.totalchronometer);
+
         //restDuration part
         restCountdownText = findViewById(R.id.restCountdownText);
         makeStyle();
@@ -303,7 +302,8 @@ public class StopWatchAct extends AppCompatActivity {
         btnstop=findViewById(R.id.btnstop);
         bgcircle=findViewById(R.id.bgcircle);
         icanchor =findViewById(R.id.icanchor);
-
+        //chronometer
+        chronometer=findViewById(R.id.totalchronometer);
         hourglass=findViewById(R.id.hourglass);
 
 
@@ -315,9 +315,10 @@ public class StopWatchAct extends AppCompatActivity {
         //animasyonları başlat
         bgcircle.startAnimation(atg);
         icanchor.startAnimation(atg);
-
         hourglass.startAnimation(btgone);
         chronometer.startAnimation(btgone);
+
+
         btnstart.startAnimation(btgone);
         btnstop.startAnimation(btgtwo);
 

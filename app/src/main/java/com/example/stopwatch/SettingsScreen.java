@@ -30,7 +30,7 @@ public class SettingsScreen extends AppCompatActivity {
     TextView switchsoundtext,switchvibrationtext,switchaktolgamodtext;
     Button btnsave;
     int restDurationValue;
-    public static int defaultValue = 10;
+    public static int defaultValue = 45;
     //switches
     public Switch switchaktolga,switchvibration,switchsound;
     SharedPreferences sp;
