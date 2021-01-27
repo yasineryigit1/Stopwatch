@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Vibration On"
+        android:text="Finish Notification On"
         android:textAlignment="center"
         android:textColor="#A3A2AD"
         android:textSize="18sp"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Serdar Aktolga Mod On"
+        android:text="Start Notification On"
         android:textAlignment="center"
         android:textColor="#A3A2AD"
         android:textSize="18sp"
@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.69" />
 
     <Switch
-        android:id="@+id/vibration_switch"
+        android:id="@+id/sound_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Sound Notification On"
+        android:text="Vibration On"
         android:textAlignment="center"
         android:textColor="#A3A2AD"
         android:textSize="18sp"
@@ -87,7 +87,7 @@
         app:layout_constraintVertical_bias="0.688" />
 
     <Switch
-        android:id="@+id/sound_switch"
+        android:id="@+id/vibration_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
@@ -121,7 +121,7 @@
 
         android:background="@drawable/bgbtngreen"
         android:onClick="save"
-        android:text="SAVE CHANGES"
+        android:text="Save Changes"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="20sp"

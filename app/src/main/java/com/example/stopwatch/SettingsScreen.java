@@ -84,11 +84,11 @@ public class SettingsScreen extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     MediaController.booleanaktolga=true;
-                    switchaktolgamodtext.setText("Serdar Aktolga Mod On");
+                    switchaktolgamodtext.setText("Start Notification On");
 
                 }else{
                     MediaController.booleanaktolga=false;
-                    switchaktolgamodtext.setText("Serdar Aktolga Mod Off");
+                    switchaktolgamodtext.setText("Start Notification Off");
                 }
             }
         });
@@ -112,10 +112,10 @@ public class SettingsScreen extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     MediaController.booleansound=true;
-                    switchsoundtext.setText("Sound Notification On");
+                    switchsoundtext.setText("Finish Notification On");
                 }else{
                     MediaController.booleansound=false;
-                    switchsoundtext.setText("Sound Notification Off");
+                    switchsoundtext.setText("Finish Notification Off");
                 }
             }
         });

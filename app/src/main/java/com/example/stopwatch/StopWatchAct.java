@@ -33,7 +33,7 @@ import java.util.concurrent.BlockingDeque;
 public class StopWatchAct extends AppCompatActivity {
     HeadsetBroadcastingClass headsetBroadcastingClass;
     Button btnstart,btnstop;
-    ImageView icanchor,bgcircle,hourglass;
+    ImageView icanchor,bgcircle;
     Animation roundingalone,atg,btgone,btgtwo;
 
     MediaPlayer mp;
@@ -304,7 +304,7 @@ public class StopWatchAct extends AppCompatActivity {
         icanchor =findViewById(R.id.icanchor);
         //chronometer
         chronometer=findViewById(R.id.totalchronometer);
-        hourglass=findViewById(R.id.hourglass);
+
 
 
         //animation decleration
@@ -315,7 +315,7 @@ public class StopWatchAct extends AppCompatActivity {
         //animasyonları başlat
         bgcircle.startAnimation(atg);
         icanchor.startAnimation(atg);
-        hourglass.startAnimation(btgone);
+
         chronometer.startAnimation(btgone);
 
 

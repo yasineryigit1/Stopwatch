@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="The pain you feel today will be\n the strength you feel tomorrow"
+        android:text="Don't forget to warm up."
         android:textAlignment="center"
         android:textColor="#A3A2AD"
         android:textSize="18sp"

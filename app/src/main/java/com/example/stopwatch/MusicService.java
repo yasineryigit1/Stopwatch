@@ -75,7 +75,7 @@ public class MusicService extends Service {
     public void firstStartSound(Boolean boolaktolga) {
         if (boolaktolga) {
             //Log.d(TAG, "firstStartSound: çalmadan önce boolsound geldi"+boolsound);
-            mp = MediaPlayer.create(MusicService.this,R.raw.aktolga1);
+            mp = MediaPlayer.create(MusicService.this,R.raw.startsound);
             mp.start();
         }
 

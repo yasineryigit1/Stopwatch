@@ -16,14 +16,13 @@
         android:src="@drawable/bgcircle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.124"
+        app:layout_constraintVertical_bias="0.159"
 
 
         />
-
 
     <ImageView
         android:id="@+id/icanchor"
@@ -36,25 +35,26 @@
 
         app:layout_constraintBottom_toBottomOf="@+id/bgcircle"
         app:layout_constraintEnd_toEndOf="@+id/bgcircle"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/bgcircle"
         app:layout_constraintTop_toTopOf="@+id/bgcircle"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.462" />
+
 
     <Chronometer
-        android:id="@+id/timerHere"
+        android:id="@+id/totalchronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFF"
-        android:textSize="62sp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#ffffff"
 
-
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.025" />
 
     <Button
         android:id="@+id/btnfinish"
@@ -63,7 +63,7 @@
 
         android:background="@drawable/bgbtngreen"
         android:onClick="start"
-        android:text="Start Now"
+        android:text="Take a break"
         android:textAllCaps="false"
         android:textColor="#FFF"
         android:textSize="20sp"
@@ -72,7 +72,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
+        app:layout_constraintVertical_bias="0.815" />
 
     <Button
         android:id="@+id/btnstop"
@@ -81,7 +81,7 @@
 
         android:background="@drawable/bgbtnred"
         android:onClick="stop"
-        android:text="Finish Workout"
+        android:text="Back to the training"
         android:textAllCaps="false"
         android:textColor="#AF3555"
         android:textSize="20sp"
@@ -91,6 +91,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.919" />
+
+    <TextView
+        android:id="@+id/restCountdownText"
+        android:layout_width="144dp"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:text="10:00"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.624" />
+
+    <ImageView
+        android:id="@+id/settingsicon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"
+        android:onClick="settingsButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02"
+        app:srcCompat="@drawable/settingsicon" />
+
+    <ImageView
+        android:id="@+id/exitbutton"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="1dp"
+        android:onClick="finishTraining"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
+        app:srcCompat="@drawable/exitbutton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
