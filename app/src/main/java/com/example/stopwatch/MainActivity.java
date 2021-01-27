@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         makeStyles();
 
-       reklamYukle();
-
-
-    }
-
-    private void reklamYukle() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -62,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+
 
     }
 
