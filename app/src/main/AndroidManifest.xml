@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.stopwatch">
+    package="com.ossovita.stopwatch">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,13 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsScreen"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.ossovita.stopwatch.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".StopWatchAct"
-            android:screenOrientation="portrait"></activity>
+            android:name="com.ossovita.stopwatch.SettingsScreen"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.ossovita.stopwatch.StopWatchAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ossovita.stopwatch.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +35,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".MusicService" />
+
+        <service android:name="com.ossovita.stopwatch.MusicService" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5103372605554042~9332805205"/>
+            android:value="ca-app-pub-5103372605554042~9332805205" />
     </application>
 
 </manifest>

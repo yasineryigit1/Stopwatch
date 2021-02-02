@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "180638059815",
+    "project_id": "stopwatch-48bde",
+    "storage_bucket": "stopwatch-48bde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180638059815:android:25239d91d6e3d704272d02",
+        "android_client_info": {
+          "package_name": "com.ossovita.stopwatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180638059815-mcf6561023jl0mru7tldeo9kqbivulve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9fyw8IYk3N7fatTjgf1zc_DG31KXSZFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180638059815-mcf6561023jl0mru7tldeo9kqbivulve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
